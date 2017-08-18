@@ -256,6 +256,14 @@ target_link_libraries(${TARGET_LIB_IOTJS}
   ${EXTERNAL_STATIC_LIB}
   ${EXTERNAL_SHARED_LIB}
 )
+if("${LIB_INSTALL_DIR}" STREQUAL "")
+  set(LIB_INSTALL_DIR "/opt/iotjs/lib")
+endif()
+
+if("${BIN_INSTALL_DIR}" STREQUAL "")
+  set(BIN_INSTALL_DIR "/opt/iotjs/bin")
+endif()
+
 install(TARGETS ${TARGET_LIB_IOTJS} DESTINATION ${LIB_INSTALL_DIR})
 
 if(NOT BUILD_LIB_ONLY)

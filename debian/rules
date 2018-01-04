@@ -87,6 +87,9 @@ rule/setup: /etc/debian_version
  python \
  #EOL
 
+override_dh_shlibdeps:
+	@echo "Skipping dh_shlibdeps"
+
 %:
 	dh $@ 
 

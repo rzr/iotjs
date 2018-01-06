@@ -49,3 +49,6 @@ TAGS
 /debian/*.debhelper.log
 /debian/*.substvars
 /debian/iotjs/
+
+# Developer files
+/tmp/

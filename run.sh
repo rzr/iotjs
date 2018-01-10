@@ -25,9 +25,9 @@ env_()
     org="Samsung"
     branch="master"
 
-    # user="TODO" # Update here if forking
-    # org="${USER}"
-    # branch="sandbox/${user}/${branch}"
+    user="rzr" # Update here if forking
+    org="tizenteam"
+    branch="sandbox/${user}/debian/${branch}"
 
     url="https://github.com/${org}/${project}.git#${branch}"
     run_url="https://raw.githubusercontent.com/${org}/${project}/${branch}/run.sh"

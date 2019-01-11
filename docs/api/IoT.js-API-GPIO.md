@@ -28,7 +28,7 @@ in the documentation of a given board.
 * On Tizen, the pin number is defined in [this documentation](../targets/tizen/SystemIO-Pin-Information-Tizen.md#gpio).
 * On NuttX, the pin number is defined in the documentation of the target board. For more information, please check the
 following list:
-[STM32F4-discovery](../targets/nuttx/stm32f4dis/IoT.js-API-Stm32f4dis.md#gpio-pin)
+[STM32F4-discovery](../targets/nuttx/stm32f4dis/IoT.js-API-Stm32f7nucleo.md#gpio-pin)
 
 
 ### DIRECTION

@@ -39,7 +39,7 @@ if (process.platform === 'linux') {
   }
   pin.i2c1 = 1;
 } else if (process.platform === 'nuttx') {
-  var stm32_pin = require('stm32f4dis').pin;
+  var stm32_pin = require('nucleo-f767zi').pin;
   pin.led = stm32_pin.PA10;
   pin.switch = stm32_pin.PA15;
   pin.pwm1 = stm32_pin.PWM1.CH1_1;

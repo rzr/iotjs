@@ -37,7 +37,7 @@ To correctly open a PWM pin one must know the correct pin number:
 * On Linux, `pin` is a number which is `0` or `1`.
 * On Tizen, `pin` is a number which is `2`. (Only ARTIK530 board support PWM.)
 * On NuttX, you have to know pin name. The pin name is defined in target board module. For more module information, please see below list.
-  * [STM32F4-discovery](../targets/nuttx/stm32f4dis/IoT.js-API-Stm32f4dis.md#pwm-pin)
+  * [STM32F4-discovery](../targets/nuttx/stm32f4dis/IoT.js-API-Stm32f7nucleo.md#pwm-pin)
 
 
 **Example**
@@ -68,7 +68,7 @@ Opens PWM pin with the specified configuration.
 To correctly open a PWM pin one must know the correct pin number:
 * On Linux, `pin` is a number which is `0` or `1`.
 * On NuttX, you have to know pin name. The pin name is defined in target board module. For more module information, please see below list.
-  * [STM32F4-discovery](../targets/nuttx/stm32f7nucleo/IoT.js-API-Stm32f4dis.md#pwm-pin)
+  * [STM32F4-discovery](../targets/nuttx/stm32f7nucleo/IoT.js-API-Stm32f7nucleo.md#pwm-pin)
 
 
 **Example**

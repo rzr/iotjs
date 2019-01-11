@@ -22,7 +22,7 @@ if (process.platform === 'linux') {
   configuration.device =
     '/sys/devices/12d10000.adc/iio:device0/in_voltage0_raw';
 } else if (process.platform === 'nuttx') {
-  configuration.pin = require('nucleo-f767zi').pin.ADC1_3;
+  configuration.pin = require('stm32f7nucleo').pin.ADC1_3;
 } else if (process.platform === 'tizenrt') {
   configuration.pin = 0;
 } else {

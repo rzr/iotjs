@@ -18,7 +18,7 @@ SPI (Serial Peripheral Interface) is a communication protocol which defines a wa
 
 * On Tizen, the bus number is defined in [this documentation](../targets/tizen/SystemIO-Pin-Information-Tizen.md#spi).
 * On NuttX, you have to know the number of pins that is defined on the target board module. For more information, please see the list below.
-  * [STM32F4-discovery](../targets/nuttx/stm32f4dis/IoT.js-API-Stm32f4dis.md)
+  * [STM32F4-discovery](../targets/nuttx/stm32f4dis/IoT.js-API-Stm32f7nucleo.md)
 
 ### SPI.MODE
 The clock polarity and the clock phase can be specified as `0` or `1` to form four unique modes to provide flexibility in communication between devices. The `SPI.MODE` will specify which one to use (the combinations of the polarity and phase).

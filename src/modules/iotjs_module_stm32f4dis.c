@@ -14,17 +14,17 @@
  */
 
 #include "iotjs_def.h"
-#include "iotjs_module_stm32f4dis.h"
+#include "iotjs_module_nucleo-f767zi.h"
 
 
 jerry_value_t InitStm32f4dis() {
-  jerry_value_t stm32f4dis = jerry_create_object();
+  jerry_value_t nucleo-f767zi = jerry_create_object();
 
 #if defined(__NUTTX__)
 
-  iotjs_stm32f4dis_pin_initialize(stm32f4dis);
+  iotjs_nucleo-f767zi_pin_initialize(nucleo-f767zi);
 
 #endif
 
-  return stm32f4dis;
+  return nucleo-f767zi;
 }

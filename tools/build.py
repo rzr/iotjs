@@ -295,7 +295,7 @@ def build_cmake_args(options):
 
 
 def run_make(options, build_home, *args):
-    make_opt = ['-C', build_home]
+    make_opt = ['-C', build_home, 'VERBOSE=1']
     make_opt.extend(args)
     if not options.no_parallel_build:
         make_opt.append('-j')

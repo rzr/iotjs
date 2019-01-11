@@ -310,7 +310,7 @@
         }
       },
       "native_files": ["modules/iotjs_module_stm32f4dis.c"],
-      "init": "InitStm32f4dis"
+      "init": "InitStm32f7nucleo"
     },
     "stm32f7nucleo": {
       "platforms": {
@@ -319,7 +319,7 @@
         }
       },
       "native_files": ["modules/iotjs_module_stm32f7nucleo.c"],
-      "init": "InitStm32f4dis"
+      "init": "InitStm32f7nucleo"
     },
     "stream": {
       "js_file": "js/stream.js",

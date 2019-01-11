@@ -312,13 +312,13 @@
       "native_files": ["modules/iotjs_module_stm32f4dis.c"],
       "init": "InitStm32f4dis"
     },
-    "nucleo-f767zi": {
+    "stm32f7nucleo": {
       "platforms": {
         "nuttx": {
-          "native_files": ["modules/nuttx/iotjs_module_nucleo-f767zi-nuttx.c"]
+          "native_files": ["modules/nuttx/iotjs_module_stm32f7nucleo-nuttx.c"]
         }
       },
-      "native_files": ["modules/iotjs_module_nucleo-f767zi.c"],
+      "native_files": ["modules/iotjs_module_stm32f7nucleo.c"],
       "init": "InitStm32f4dis"
     },
     "stream": {

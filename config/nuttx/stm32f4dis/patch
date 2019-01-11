@@ -1,5 +1,5 @@
---- a/configs/nucleo-f767zicovery/include/board.h
-+++ b/configs/nucleo-f767zicovery/include/board.h
+--- a/configs/stm32f7nucleocovery/include/board.h
++++ b/configs/stm32f7nucleocovery/include/board.h
 @@ -253,6 +253,13 @@
  #  define GPIO_CAN2_TX GPIO_CAN2_TX_1
  #endif

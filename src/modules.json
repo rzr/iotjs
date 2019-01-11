@@ -312,6 +312,15 @@
       "native_files": ["modules/iotjs_module_stm32f4dis.c"],
       "init": "InitStm32f4dis"
     },
+    "nucleo-f767zi": {
+      "platforms": {
+        "nuttx": {
+          "native_files": ["modules/nuttx/iotjs_module_nucleo-f767zi-nuttx.c"]
+        }
+      },
+      "native_files": ["modules/iotjs_module_nucleo-f767zi.c"],
+      "init": "InitStm32f4dis"
+    },
     "stream": {
       "js_file": "js/stream.js",
       "require": ["stream_duplex", "stream_internal", "stream_readable",

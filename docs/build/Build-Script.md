@@ -173,7 +173,7 @@ With given this option, compilation process will not run in parallel. In other w
 To build for nuttx os, nuttx home directory must be given.
 
 ```
-./tools/build.py --target-os=nuttx --target-arch=arm --target-board=stm32f4dis --nuttx-home="..."
+./tools/build.py --target-os=nuttx --target-arch=arm --target-board=stm32f7nucleo --nuttx-home="..."
 ```
 
 ---
@@ -215,12 +215,12 @@ Specify target architecture.
 
 ---
 #### `--target-board`
-* `artik10` | `artik05x` | `rpi2` | `rpi3` | `stm32f4dis` | empty
+* `artik10` | `artik05x` | `rpi2` | `rpi3` | `stm32f7nucleo` | empty
 
 Specify target board.
 
 ```
-./tools/build.py --target-os=nuttx --target-arch=arm --target-board=stm32f4dis
+./tools/build.py --target-os=nuttx --target-arch=arm --target-board=stm32f7nucleo
 ```
 
 ---

@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-#if defined(__NUTTX__) && TARGET_BOARD == stm32f4dis
+#if defined(__NUTTX__) && TARGET_BOARD == nucleo-f767zi
 
 #include <stdint.h>
 

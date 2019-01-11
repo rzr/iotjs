@@ -13,14 +13,14 @@
  * limitations under the License.
  */
 
-#if defined(__NUTTX__) && TARGET_BOARD == stm32f4dis
+#if defined(__NUTTX__) && TARGET_BOARD == nucleo-f767zi
 
 
 #include "iotjs_def.h"
 #include "iotjs_systemio-nuttx.h"
 #include "stm32_gpio.h"
 
-#include "modules/iotjs_module_stm32f4dis.h"
+#include "modules/iotjs_module_nucleo-f767zi.h"
 
 
 #if ENABLE_MODULE_ADC
@@ -181,7 +181,7 @@ static void iotjs_pin_initialize_pwm(jerry_value_t jobj) {
 #endif /* ENABLE_MODULE_PWM */
 
 
-void iotjs_stm32f4dis_pin_initialize(jerry_value_t jobj) {
+void iotjs_nucleo-f767zi_pin_initialize(jerry_value_t jobj) {
   jerry_value_t jpin = jerry_create_object();
   iotjs_jval_set_property_jval(jobj, "pin", jpin);
 

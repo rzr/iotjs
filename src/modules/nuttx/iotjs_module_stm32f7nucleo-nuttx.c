@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-#if defined(__NUTTX__) && TARGET_BOARD == f767nucleo
+#if defined(__NUTTX__) && TARGET_BOARD == stm32f767nucleo
 
 
 #include "iotjs_def.h"

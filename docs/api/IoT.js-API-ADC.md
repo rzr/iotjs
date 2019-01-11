@@ -19,7 +19,7 @@ This module allows reading analogue data from hardware pins.
 The hardware pins can be read from or written to, therefore they are called bidirectional IO pins. This module provides the reading part.
 
 On NuttX, you have to know the number of pins that is defined on the target board module. For more information, please see the list below.
-  * [STM32F4-discovery](../targets/nuttx/stm32f4dis/IoT.js-API-Stm32f4dis.md#adc-pin)
+  * [STM32F4-discovery](../targets/nuttx/stm32f4dis/IoT.js-API-Stm32f7nucleo.md#adc-pin)
 
 
 ### adc.open(configuration, callback)

@@ -131,7 +131,7 @@ elseif("${TARGET_BOARD}" STREQUAL "rpi3")
     iotjs_add_compile_flags(-mfpu=neon-vfpv4 -mfloat-abi=softfp)
   endif()
 elseif("${TARGET_BOARD}" STREQUAL "stm32fnucleo")
-  iotjs_add_compile_flags(-mcpu=cortex-m4 -march=armv7e-m -mfpu=fpv4-sp-d16)
+  iotjs_add_compile_flags(-mcpu=cortex-m7 -march=armv7e-m -mfpu=fpv4-sp-d16)
   iotjs_add_compile_flags(-mfloat-abi=hard)
 endif()
 

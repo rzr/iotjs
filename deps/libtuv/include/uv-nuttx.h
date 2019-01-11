@@ -98,8 +98,9 @@ ssize_t writev(int __fd, const struct iovec* __iovec, int __count);
 int getpeername(int sockfd, struct sockaddr* addr, socklen_t* addrlen);
 
 // Maximum queue length specifiable by listen
+#ifndef SOMAXCONN
 #define SOMAXCONN 8
-
+#endif
 //-----------------------------------------------------------------------------
 // structure extension for nuttx                                                          
 //                                                                                        

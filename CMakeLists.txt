@@ -77,13 +77,13 @@ endif()
 CHECK_C_COMPILER_FLAG(-no-pie HAS_NO_PIE)
 
 # Add buildtype-related flags
-if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
+#if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
   iotjs_add_compile_flags(-DDEBUG -DENABLE_DEBUG_LOG)
   if(HAS_NO_PIE AND NOT "${TARGET_OS}" STREQUAL "darwin")
     iotjs_add_link_flags(-no-pie)
   endif()
-endif()
-
+#endif()
+#
 if (CREATE_SHARED_LIB)
   iotjs_add_compile_flags(-fPIC)
 endif()

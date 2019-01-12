@@ -43,13 +43,16 @@
 #include <unistd.h>
 
 int uv_loop_init(uv_loop_t* loop) {
+      printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   void* saved_data;
   int err;
 
 #ifdef TUV_FEATURE_SIGNAL
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
   uv__signal_global_once_init();
 #endif
-
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
   saved_data = loop->data;
   memset(loop, 0, sizeof(*loop));
   loop->data = saved_data;
@@ -72,6 +75,7 @@ int uv_loop_init(uv_loop_t* loop) {
   loop->closing_handles = NULL;
   uv__update_time(loop);
   uv__async_init(&loop->async_watcher);
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 #ifdef TUV_FEATURE_SIGNAL
   loop->signal_pipefd[0] = -1;
   loop->signal_pipefd[1] = -1;
@@ -85,48 +89,55 @@ int uv_loop_init(uv_loop_t* loop) {
   err = uv__platform_loop_init(loop);
   if (err)
     return err;
-
+  printf("# %s:%d: %s...\n", __FILE__, __LINE__, __FUNCTION__);
 #ifdef TUV_FEATURE_SIGNAL
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
   err = uv_signal_init(loop, &loop->child_watcher);
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
   if (err)
     goto fail_signal_init;
 #endif
-
+  printf("# %s:%d: %s...\n", __FILE__, __LINE__, __FUNCTION__);
   uv__handle_unref(&loop->child_watcher);
   loop->child_watcher.flags |= UV__HANDLE_INTERNAL;
   QUEUE_INIT(&loop->process_handles);
-
+  printf("# %s:%d: %s...\n", __FILE__, __LINE__, __FUNCTION__);
   err = uv_rwlock_init(&loop->cloexec_lock);
   if (err)
     goto fail_rwlock_init;
-
+  printf("# %s:%d: %s...\n", __FILE__, __LINE__, __FUNCTION__);
   err = uv_mutex_init(&loop->wq_mutex);
   if (err)
     goto fail_mutex_init;
-
+  printf("# %s:%d: %s...\n", __FILE__, __LINE__, __FUNCTION__);
   err = uv_async_init(loop, &loop->wq_async, uv__work_done);
   if (err)
     goto fail_async_init;
-
+  printf("# %s:%d: %s...\n", __FILE__, __LINE__, __FUNCTION__);
   uv__handle_unref(&loop->wq_async);
   loop->wq_async.flags |= UV__HANDLE_INTERNAL;
-
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
   return 0;
 
 fail_async_init:
+    printf("# %s:%d: %s...\n", __FILE__, __LINE__, __FUNCTION__);
   uv_mutex_destroy(&loop->wq_mutex);
 
 fail_mutex_init:
+    printf("# %s:%d: %s...\n", __FILE__, __LINE__, __FUNCTION__);
   uv_rwlock_destroy(&loop->cloexec_lock);
 
 fail_rwlock_init:
+    printf("# %s:%d: %s...\n", __FILE__, __LINE__, __FUNCTION__);
 #ifdef TUV_FEATURE_SIGNAL
   uv__signal_loop_cleanup(loop);
 #endif
 
 fail_signal_init:
+    printf("# %s:%d: %s...\n", __FILE__, __LINE__, __FUNCTION__);
   uv__platform_loop_delete(loop);
 
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
   return err;
 }
 

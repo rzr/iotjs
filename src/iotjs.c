@@ -98,29 +98,38 @@ static bool jerry_initialize(iotjs_environment_t* env) {
 
 
 bool iotjs_initialize(iotjs_environment_t* env) {
-  // Initialize JerryScript
+  printf("# // Initialize JerryScript %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
   if (!jerry_initialize(env)) {
+      printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
     DLOG("iotjs_jerry_init failed");
     return false;
   }
-
-  // Set event loop.
+        
+  printf("# %s:%d: %s // Set event loop.\n", __FILE__, __LINE__, __FUNCTION__);
+ 
   if (!uv_default_loop()) {
+      printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
     DLOG("iotjs uvloop init failed");
     return false;
   }
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   iotjs_environment_set_loop(env, uv_default_loop());
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 
   // Bind environment to global object.
   const jerry_value_t global = jerry_get_global_object();
   jerry_set_object_native_pointer(global, env, NULL);
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 
   // Initialize builtin process module.
   const jerry_value_t process = iotjs_module_get("process");
   iotjs_jval_set_property_jval(global, "process", process);
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 
   // Release the global object
   jerry_release_value(global);
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 
   return true;
 }
@@ -150,6 +159,8 @@ void iotjs_restart(iotjs_environment_t* env, jerry_value_t jmain) {
 
 
 void iotjs_run(iotjs_environment_t* env) {
+    printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
 // Evaluating 'iotjs.js' returns a function.
 #ifndef ENABLE_SNAPSHOT
   jerry_value_t jmain = iotjs_jhelper_eval("iotjs.js", strlen("iotjs.js"),
@@ -177,6 +188,8 @@ void iotjs_run(iotjs_environment_t* env) {
 
 
 static int iotjs_start(iotjs_environment_t* env) {
+    printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   iotjs_environment_set_state(env, kRunningMain);
 
   // Load and call iotjs.js.
@@ -244,8 +257,12 @@ void iotjs_conf_console_out(int (*out)(int lv, const char* fmt, ...)) {
 
 int iotjs_entry(int argc, char** argv) {
   int ret_code = 0;
+  printf("%s\n", __FUNCTION__);
+  printf("%s\n", __TIME__);
+  DLOG("iotjs_initialize ?");
+  
+  printf("# %s:%d: // Initialize debug log and environments\n", __FILE__, __LINE__);
 
-  // Initialize debug log and environments
   iotjs_debuglog_init();
   srand((unsigned)jerry_port_get_current_time());
 
@@ -253,23 +270,26 @@ int iotjs_entry(int argc, char** argv) {
   if (!iotjs_environment_parse_command_line_arguments(env, (uint32_t)argc,
                                                       argv)) {
     ret_code = 1;
+    printf("# %s:%d\n", __FILE__, __LINE__);
     goto exit;
   }
-
+  printf("# %s:%d: Initialize IoT.js\n", __FILE__, __LINE__);
   // Initialize IoT.js
   if (!iotjs_initialize(env)) {
     DLOG("iotjs_initialize failed");
     ret_code = 1;
     goto terminate;
   }
-
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
   // Start IoT.js
   ret_code = iotjs_start(env);
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 
   // Ends IoT.js
   iotjs_end(env);
 
 terminate:
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
   iotjs_terminate(env);
 
 exit:
@@ -285,5 +305,8 @@ exit:
 
   iotjs_environment_release();
   iotjs_debuglog_release();
+  
+  printf("# %s:%d\n", __FILE__, __LINE__);
+
   return ret_code;
 }

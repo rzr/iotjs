@@ -41,7 +41,7 @@ typedef struct {
 } cli_option_t;
 
 #define CLI_DEFAULT_HELP_STRING \
-  "Usage: iotjs [options] {FILE | FILE.js} [arguments]\n"
+  "TODO: Usage: iotjs [options] {FILE | FILE.js} [arguments]\n"
 
 static iotjs_environment_t current_env;
 static bool initialized = false;
@@ -96,6 +96,8 @@ static void initialize(iotjs_environment_t* env) {
 bool iotjs_environment_parse_command_line_arguments(iotjs_environment_t* env,
                                                     uint32_t argc,
                                                     char** argv) {
+    printf("%s\n", __FUNCTION__);
+
   // declare options
   const cli_option_t opts[] = {
     {
@@ -141,7 +143,7 @@ bool iotjs_environment_parse_command_line_arguments(iotjs_environment_t* env,
 
   while (i < argc && argv[i][0] == '-') {
     cur_opt = NULL;
-
+    printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
     // check if the known option is given.
     for (uint32_t k = 0; k < NUM_OF_OPTIONS; k++) {
       if ((opts[k].opt && !strcmp(&argv[i][1], opts[k].opt)) ||
@@ -230,6 +232,7 @@ bool iotjs_environment_parse_command_line_arguments(iotjs_environment_t* env,
   while (i < argc)
     env->argv[env->argc++] = argv[i++];
 
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
   return true;
 }
 

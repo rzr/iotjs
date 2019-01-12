@@ -475,7 +475,7 @@ int uv_spawn(uv_loop_t* loop,
   err = uv__make_pipe(signal_pipe, 0);
   if (err)
     goto error;
-
+  printf("# %s:%d: %s...\n", __FILE__, __LINE__, __FUNCTION__);
   uv_signal_start(&loop->child_watcher, uv__chld, SIGCHLD);
 
   /* Acquire write lock to prevent opening new fds in worker threads */

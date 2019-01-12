@@ -24,6 +24,9 @@ typedef int (*iotjs_console_out_t)(int level, const char* format, ...);
 extern iotjs_console_out_t iotjs_console_out;
 extern void iotjs_set_console_out(iotjs_console_out_t output);
 
+#ifndef ENABLE_DEBUG_LOG
+#define ENABLE_DEBUG_LOG
+#endif
 #ifdef ENABLE_DEBUG_LOG
 
 

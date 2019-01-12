@@ -181,8 +181,8 @@ static void iotjs_pin_initialize_pwm(jerry_value_t jobj) {
 #endif /* ENABLE_MODULE_PWM */
 
 
-void iotjs_f767nucleo_pin_initialize(jerry_value_t jobj) {
-  jerry_value_t jpin = jerry_create_object();
+void iotjs_stm32f7nucleo_pin_initialize(jerry_value_t jobj) {
+    jerry_value_t jpin = jerry_create_object();
   iotjs_jval_set_property_jval(jobj, "pin", jpin);
 
 #if ENABLE_MODULE_ADC

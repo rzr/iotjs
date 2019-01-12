@@ -13,14 +13,14 @@
  * limitations under the License.
  */
 
-#if defined(__NUTTX__) && TARGET_BOARD == stm32f767nucleo
+#if defined(__NUTTX__) && TARGET_BOARD == stm32f7nucleo
 
 
 #include "iotjs_def.h"
 #include "iotjs_systemio-nuttx.h"
 #include "stm32_gpio.h"
 
-#include "modules/iotjs_module_f767nucleo.h"
+#include "modules/iotjs_module_stm32f7nucleo.h"
 
 
 #if ENABLE_MODULE_ADC

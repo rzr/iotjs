@@ -45,7 +45,6 @@ if(DEFINED TARGET_BOARD)
           ${FLAGS_COMMON}
           "-mcpu=cortex-m7"
           "-mthumb"
-          "-march=armv7e-m"
           "-mfpu=fpv4-sp-d16"
           "-mfloat-abi=hard"
           )

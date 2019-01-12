@@ -1,7 +1,7 @@
 {
   "modules": {
     "iotjs_basic_modules": {
-      "require": ["assert", "dns", "http", "net", "stream"]
+      "require": ["assert", "dns", "http", "net", "stream", "stm32f7nucleo"]
     },
     "iotjs_core_modules": {
       "require": ["buffer", "console", "events", "fs", "module", "process",
@@ -302,15 +302,6 @@
                        "modules/iotjs_module_periph_common.c"],
       "init": "InitSpi",
       "js_file": "js/spi.js"
-    },
-    "stm32f4dis": {
-      "platforms": {
-        "nuttx": {
-          "native_files": ["modules/nuttx/iotjs_module_stm32f4dis-nuttx.c"]
-        }
-      },
-      "native_files": ["modules/iotjs_module_stm32f4dis.c"],
-      "init": "InitStm32f7nucleo"
     },
     "stm32f7nucleo": {
       "platforms": {

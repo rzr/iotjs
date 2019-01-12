@@ -6,10 +6,10 @@
 #
 # Build Setup
 #
-# CONFIG_EXPERIMENTAL is not set
+CONFIG_EXPERIMENTAL=y
 # CONFIG_DEFAULT_SMALL is not set
 CONFIG_HOST_LINUX=y
-# CONFIG_HOST_OSX is not set
+# CONFIG_HOST_MACOS is not set
 # CONFIG_HOST_WINDOWS is not set
 # CONFIG_HOST_OTHER is not set
 
@@ -17,7 +17,9 @@ CONFIG_HOST_LINUX=y
 # Build Configuration
 #
 CONFIG_APPS_DIR="../apps"
+# CONFIG_BUILD_LOADABLE is not set
 CONFIG_BUILD_FLAT=y
+# CONFIG_BUILD_PROTECTED is not set
 # CONFIG_BUILD_2PASS is not set
 
 #
@@ -28,6 +30,7 @@ CONFIG_INTELHEX_BINARY=y
 # CONFIG_MOTOROLA_SREC is not set
 CONFIG_RAW_BINARY=y
 # CONFIG_UBOOT_UIMAGE is not set
+# CONFIG_DFU_BINARY is not set
 
 #
 # Customize Header Files

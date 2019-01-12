@@ -204,6 +204,8 @@ void uv_mutex_destroy(uv_mutex_t* mutex) {
 
 
 void uv_mutex_lock(uv_mutex_t* mutex) {
+      printf("# %s:%d: %s...\n", __FILE__, __LINE__, __FUNCTION__);
+
   EnterCriticalSection(mutex);
 }
 

@@ -20,6 +20,7 @@
 // as utf8 is internal string representation in Jerryscript
 static jerry_value_t Print(const jerry_value_t* jargv,
                            const jerry_length_t jargc, FILE* out_fd) {
+    printf("%s\n", __FUNCTION__);
   JS_CHECK_ARGS(1, string);
   iotjs_string_t msg = JS_GET_ARG(0, string);
   const char* str = iotjs_string_data(&msg);

@@ -45,7 +45,8 @@
 static void
 print_help (char *name)
 {
-  printf ("Usage: %s [OPTION]... [FILE]...\n"
+    printf("%s\n", __FUNCTION__);
+    printf ("Usage: %s [OPTION]... [FILE]...\n"
           "\n"
           "Options:\n"
           "  --log-level [0-3]\n"
@@ -69,7 +70,8 @@ static const uint8_t *
 read_file (const char *file_name, /**< source code */
            size_t *out_size_p) /**< [out] number of bytes successfully read from source */
 {
-  FILE *file = fopen (file_name, "r");
+    printf("%s\n", __FUNCTION__);
+    FILE *file = fopen (file_name, "r");
   if (file == NULL)
   {
     jerry_port_log (JERRY_LOG_LEVEL_ERROR, "Error: cannot open file: %s\n", file_name);
@@ -117,6 +119,7 @@ read_file (const char *file_name, /**< source code */
   fclose (file);
 
   *out_size_p = bytes_read;
+  printf("%s\n", buffer);
   return (const uint8_t *) buffer;
 } /* read_file */
 

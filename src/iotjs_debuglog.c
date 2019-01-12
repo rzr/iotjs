@@ -39,7 +39,10 @@ void iotjs_debuglog_init() {
 #if defined(__linux__) || defined(__APPLE__)
   dbglevel = getenv("IOTJS_DEBUG_LEVEL");
   dbglogfile = getenv("IOTJS_DEBUG_LOGFILE");
+#else
+  dbglevel = "3";
 #endif // defined(__linux__) || defined(__APPLE__)
+
   if (dbglevel) {
     iotjs_debug_level = atoi(dbglevel);
     if (iotjs_debug_level < 0)
@@ -66,7 +69,7 @@ void iotjs_debuglog_release() {
     fclose(iotjs_log_stream);
   }
   // some embed systems(ex, nuttx) may need this
-  iotjs_log_stream = stderr;
+  iotjs_log_stream = stdout;
   iotjs_debug_level = DBGLEV_ERR;
 #endif // ENABLE_DEBUG_LOG
 }

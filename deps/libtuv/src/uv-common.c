@@ -450,15 +450,21 @@ int uv_fs_scandir_next(uv_fs_t* req, uv_dirent_t* ent) {
 static uv_loop_t default_loop_struct;
 static uv_loop_t* default_loop_ptr;
 
-
-uv_loop_t* uv_default_loop(void) {
+uv_loop_t* uv_default_loop(void)
+{   
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+    
   if (default_loop_ptr != NULL)
     return default_loop_ptr;
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 
   if (uv_loop_init(&default_loop_struct))
     return NULL;
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 
   default_loop_ptr = &default_loop_struct;
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   return default_loop_ptr;
 }
 

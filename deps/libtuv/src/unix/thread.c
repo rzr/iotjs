@@ -178,6 +178,8 @@ void uv_rwlock_destroy(uv_rwlock_t* rwlock) {
 
 
 void uv_rwlock_rdlock(uv_rwlock_t* rwlock) {
+      printf("# %s:%d: %s...\n", __FILE__, __LINE__, __FUNCTION__);
+
   uv_mutex_lock(rwlock);
 }
 

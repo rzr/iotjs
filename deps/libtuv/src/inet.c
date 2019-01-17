@@ -51,6 +51,7 @@ static int inet_pton4(const char *src, unsigned char *dst);
 
 
 int uv_inet_ntop(int af, const void* src, char* dst, size_t size) {
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
   switch (af) {
   case AF_INET:
     return (inet_ntop4(src, dst, size));
@@ -65,7 +66,7 @@ static int inet_ntop4(const unsigned char *src, char *dst, size_t size) {
   static const char fmt[] = "%u.%u.%u.%u";
   char tmp[UV__INET_ADDRSTRLEN];
   int l;
-
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
   l = snprintf(tmp, sizeof(tmp), fmt, src[0], src[1], src[2], src[3]);
   if (l <= 0 || (size_t) l >= size) {
     return UV_ENOSPC;
@@ -77,6 +78,7 @@ static int inet_ntop4(const unsigned char *src, char *dst, size_t size) {
 
 
 int uv_inet_pton(int af, const char* src, void* dst) {
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
   if (src == NULL || dst == NULL)
     return UV_EINVAL;
 
@@ -95,6 +97,7 @@ static int inet_pton4(const char *src, unsigned char *dst) {
   int saw_digit, octets, ch;
   unsigned char tmp[sizeof(struct in_addr)], *tp;
 
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
   saw_digit = 0;
   octets = 0;
   *(tp = tmp) = 0;

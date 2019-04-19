@@ -283,6 +283,7 @@ int uv__stream_try_select(uv_stream_t* stream, int* fd) {
    * kqueue doesn't work with some files from /dev mount on osx.
    * select(2) in separate thread for those fds
    */
+    printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 
   struct kevent filter[1];
   struct kevent events[1];
@@ -530,6 +531,7 @@ static int uv__emfile_trick(uv_loop_t* loop, int accept_fd) {
 void uv__server_io(uv_loop_t* loop, uv__io_t* w, unsigned int events) {
   uv_stream_t* stream;
   int err;
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 
   stream = container_of(w, uv_stream_t, io_watcher);
   assert(events == POLLIN);
@@ -583,6 +585,8 @@ void uv__server_io(uv_loop_t* loop, uv__io_t* w, unsigned int events) {
       nanosleep(&timeout, NULL);
     }
   }
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
 }
 
 
@@ -658,6 +662,7 @@ done:
 
 int uv_listen(uv_stream_t* stream, int backlog, uv_connection_cb cb) {
   int err;
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 
   switch (stream->type) {
   case UV_TCP:

@@ -143,6 +143,7 @@ skip:
 
   if (!(flags & UV_STREAM_BLOCKING))
     uv__nonblock(fd, 1);
+    printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 
 #if defined(__APPLE__)
   r = uv__stream_try_select((uv_stream_t*) tty, &fd);

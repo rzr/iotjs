@@ -16,7 +16,7 @@
 #ifndef __tuv_debuglog_header__
 #define __tuv_debuglog_header__
 
-
+#define ENABLE_DEBUG_LOG 1 //TODO
 #ifdef ENABLE_DEBUG_LOG
 
 #include <stdio.h>

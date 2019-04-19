@@ -569,6 +569,7 @@ static int uv__udp_set_membership4(uv_udp_t* handle,
   struct ip_mreq mreq;
   int optname;
   int err;
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 
   memset(&mreq, 0, sizeof mreq);
 
@@ -604,6 +605,7 @@ static int uv__udp_set_membership4(uv_udp_t* handle,
 #endif
     return -errno;
   }
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 
   return 0;
 }

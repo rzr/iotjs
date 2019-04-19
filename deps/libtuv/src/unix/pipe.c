@@ -31,6 +31,8 @@
 
 
 int uv_pipe_init(uv_loop_t* loop, uv_pipe_t* handle, int ipc) {
+        printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   uv__stream_init(loop, (uv_stream_t*)handle, UV_NAMED_PIPE);
   handle->shutdown_req = NULL;
   handle->connect_req = NULL;
@@ -41,6 +43,8 @@ int uv_pipe_init(uv_loop_t* loop, uv_pipe_t* handle, int ipc) {
 
 
 int uv_pipe_bind(uv_pipe_t* handle, const char* name) {
+        printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   struct sockaddr_un saddr;
   const char* pipe_fname;
   int sockfd;
@@ -95,6 +99,8 @@ err_socket:
 
 
 int uv_pipe_listen(uv_pipe_t* handle, int backlog, uv_connection_cb cb) {
+        printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   if (uv__stream_fd(handle) == -1)
     return -EINVAL;
 
@@ -117,6 +123,8 @@ int uv_pipe_listen(uv_pipe_t* handle, int backlog, uv_connection_cb cb) {
 
 
 void uv__pipe_close(uv_pipe_t* handle) {
+        printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   if (handle->pipe_fname) {
     /*
      * Unlink the file system entity before closing the file descriptor.
@@ -135,6 +143,7 @@ void uv__pipe_close(uv_pipe_t* handle) {
 
 int uv_pipe_open(uv_pipe_t* handle, uv_file fd) {
   int err;
+    printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 
   err = uv__nonblock(fd, 1);
   if (err)
@@ -160,6 +169,7 @@ void uv_pipe_connect(uv_connect_t* req,
   int new_sock;
   int err;
   int r;
+    printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 
   new_sock = (uv__stream_fd(handle) == -1);
 
@@ -219,6 +229,8 @@ static int uv__pipe_getsockpeername(const uv_pipe_t* handle,
                                     uv__peersockfunc func,
                                     char* buffer,
                                     size_t* size) {
+        printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   struct sockaddr_un sa;
   socklen_t addrlen;
   int err;
@@ -257,20 +269,28 @@ static int uv__pipe_getsockpeername(const uv_pipe_t* handle,
 
 
 int uv_pipe_getsockname(const uv_pipe_t* handle, char* buffer, size_t* size) {
+        printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   return uv__pipe_getsockpeername(handle, getsockname, buffer, size);
 }
 
 
 int uv_pipe_getpeername(const uv_pipe_t* handle, char* buffer, size_t* size) {
+        printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   return uv__pipe_getsockpeername(handle, getpeername, buffer, size);
 }
 
 
 void uv_pipe_pending_instances(uv_pipe_t* handle, int count) {
+        printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
 }
 
 
 int uv_pipe_pending_count(uv_pipe_t* handle) {
+        printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   uv__stream_queued_fds_t* queued_fds;
 
   if (!handle->ipc)
@@ -288,6 +308,8 @@ int uv_pipe_pending_count(uv_pipe_t* handle) {
 
 
 uv_handle_type uv_pipe_pending_type(uv_pipe_t* handle) {
+        printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   if (!handle->ipc)
     return UV_UNKNOWN_HANDLE;
 

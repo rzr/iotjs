@@ -128,5 +128,6 @@ static int inet_pton4(const char *src, unsigned char *dst) {
   if (octets < 4)
     return UV_EINVAL;
   memcpy(dst, tmp, sizeof(struct in_addr));
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
   return 0;
 }

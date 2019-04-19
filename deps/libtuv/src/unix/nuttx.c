@@ -44,10 +44,14 @@
 // loop
 int uv__platform_loop_init(uv_loop_t* loop) {
   loop->npollfds = 0;
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   return 0;
 }
 
 void uv__platform_loop_delete(uv_loop_t* loop) {
+    printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   loop->npollfds = 0;
 }
 
@@ -55,6 +59,8 @@ void uv__platform_loop_delete(uv_loop_t* loop) {
 //-----------------------------------------------------------------------------
 
 void uv__platform_invalidate_fd(uv_loop_t* loop, int fd) {
+    printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+            
   int i;
   int nfd = loop->npollfds;
   for (i = 0; i < nfd; ++i) {
@@ -73,6 +79,8 @@ void uv__platform_invalidate_fd(uv_loop_t* loop, int fd) {
 //-----------------------------------------------------------------------------
 
 int getpeername(int sockfd, struct sockaddr* addr, socklen_t* addrlen) {
+    printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   return 0;
 }
 
@@ -80,6 +88,7 @@ ssize_t readv(int fd, const struct iovec* iiovec, int count) {
   ssize_t result = 0;
   ssize_t total = 0;
   int idx;
+    printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 
   for (idx = 0; idx < count; ++idx) {
     result = read(fd, iiovec[idx].iov_base, iiovec[idx].iov_len);
@@ -97,6 +106,7 @@ ssize_t writev(int fd, const struct iovec* iiovec, int count) {
   ssize_t result = 0;
   ssize_t total = 0;
   int idx;
+    printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 
   for (idx = 0; idx < count; ++idx) {
     result = write(fd, iiovec[idx].iov_base, iiovec[idx].iov_len);
@@ -112,6 +122,8 @@ ssize_t writev(int fd, const struct iovec* iiovec, int count) {
 // From nuttx_clock.c
 uint64_t uv__hrtime(uv_clocktype_t type) {
   struct timespec ts;
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   clock_gettime(CLOCK_MONOTONIC, &ts);
   uint64_t ret = (((uint64_t) ts.tv_sec) * ((uint64_t) 1e9) +
                    (uint64_t) ts.tv_nsec);
@@ -123,6 +135,8 @@ static void uv__add_pollfd(uv_loop_t* loop, struct pollfd* pe) {
   int i;
   bool exist = false;
   int free_idx = -1;
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   for (i = 0; i < loop->npollfds; ++i) {
     struct pollfd* cur = &loop->pollfds[i];
     if (cur->fd == pe->fd) {
@@ -151,11 +165,14 @@ static void uv__add_pollfd(uv_loop_t* loop, struct pollfd* pe) {
     cur->sem = 0;
     cur->priv = 0;
   }
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 }
 
 
 static void uv__rem_pollfd(uv_loop_t* loop, struct pollfd* pe) {
   int i = 0;
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   while (i < loop->npollfds) {
     struct pollfd* cur = &loop->pollfds[i];
     if (cur->fd == pe->fd) {
@@ -178,13 +195,17 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
   int count;
   int nfd;
   int i;
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 
   if (loop->nfds == 0) {
     assert(QUEUE_EMPTY(&loop->watcher_queue));
     return;
   }
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 
   while (!QUEUE_EMPTY(&loop->watcher_queue)) {
+      printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
     q = QUEUE_HEAD(&loop->watcher_queue);
     QUEUE_REMOVE(q);
     QUEUE_INIT(q);
@@ -200,13 +221,17 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
 
     w->events = w->pevents;
   }
+    printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 
   assert(timeout >= -1);
   base = loop->time;
   count = 5;
 
   for (;;) {
+      printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
     nfd = poll(loop->pollfds, loop->npollfds, timeout);
+      printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 
     SAVE_ERRNO(uv__update_time(loop));
 
@@ -235,6 +260,8 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
     }
 
 handle_poll:
+        printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
     nevents = 0;
 
     for (i = 0; i < loop->npollfds; ++i) {
@@ -267,6 +294,8 @@ handle_poll:
       continue;
     }
 update_timeout:
+        printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
     assert(timeout > 0);
 
     diff = loop->time - base;
@@ -275,4 +304,7 @@ update_timeout:
     }
     timeout -= diff;
   }
+
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 }
+

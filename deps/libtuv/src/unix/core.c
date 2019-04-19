@@ -109,7 +109,9 @@ STATIC_ASSERT(offsetof(uv_buf_t, len) == offsetof(struct iovec, iov_len));
 
 
 void uv_close(uv_handle_t* handle, uv_close_cb close_cb) {
-  assert(!uv__is_closing(handle));
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
+    assert(!uv__is_closing(handle));
 
   handle->flags |= UV_CLOSING;
   handle->close_cb = close_cb;
@@ -174,6 +176,8 @@ void uv_close(uv_handle_t* handle, uv_close_cb close_cb) {
 
 
 void uv__make_close_pending(uv_handle_t* handle) {
+      printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   assert(handle->flags & UV_CLOSING);
   assert(!(handle->flags & UV_CLOSED));
   handle->next_closing = handle->loop->closing_handles;
@@ -181,6 +185,8 @@ void uv__make_close_pending(uv_handle_t* handle) {
 }
 
 int uv__getiovmax(void) {
+      printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
 #if defined(IOV_MAX)
   return IOV_MAX;
 #elif defined(_SC_IOV_MAX)
@@ -201,6 +207,8 @@ int uv__getiovmax(void) {
 
 
 static void uv__finish_close(uv_handle_t* handle) {
+      printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   /* Note: while the handle is in the UV_CLOSING state now, it's still possible
    * for it to be active in the sense that uv__is_active() returns true.
    * A good example is when the user calls uv_shutdown(), immediately followed
@@ -249,6 +257,8 @@ static void uv__finish_close(uv_handle_t* handle) {
 
 
 static void uv__run_closing_handles(uv_loop_t* loop) {
+      printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   uv_handle_t* p;
   uv_handle_t* q;
 
@@ -264,11 +274,15 @@ static void uv__run_closing_handles(uv_loop_t* loop) {
 
 
 int uv_is_closing(const uv_handle_t* handle) {
+      printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   return uv__is_closing(handle);
 }
 
 
 int uv_backend_timeout(const uv_loop_t* loop) {
+          printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   if (loop->stop_flag != 0)
     return 0;
 
@@ -289,6 +303,8 @@ int uv_backend_timeout(const uv_loop_t* loop) {
 
 
 static int uv__loop_alive(const uv_loop_t* loop) {
+          printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   return uv__has_active_handles(loop) ||
          uv__has_active_reqs(loop) ||
          loop->closing_handles != NULL;
@@ -296,11 +312,15 @@ static int uv__loop_alive(const uv_loop_t* loop) {
 
 
 int uv_loop_alive(const uv_loop_t* loop) {
+          printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
     return uv__loop_alive(loop);
 }
 
 /* test driver */
 int uv_loop_has_active_reqs(const uv_loop_t* loop) {
+          printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
     return uv__has_active_reqs(loop);
 }
 
@@ -309,12 +329,15 @@ int uv_run(uv_loop_t* loop, uv_run_mode mode) {
   int timeout;
   int r;
   int ran_pending;
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 
   r = uv__loop_alive(loop);
   if (!r)
     uv__update_time(loop);
 
   while (r != 0 && loop->stop_flag == 0) {
+        printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
     uv__update_time(loop);
     uv__run_timers(loop);
     ran_pending = uv__run_pending(loop);
@@ -350,17 +373,22 @@ int uv_run(uv_loop_t* loop, uv_run_mode mode) {
    */
   if (loop->stop_flag != 0)
     loop->stop_flag = 0;
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 
   return r;
 }
 
 
 void uv_update_time(uv_loop_t* loop) {
+          printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   uv__update_time(loop);
 }
 
 
 int uv_is_active(const uv_handle_t* handle) {
+          printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   return uv__is_active(handle);
 }
 
@@ -369,6 +397,7 @@ int uv_is_active(const uv_handle_t* handle) {
 int uv__socket(int domain, int type, int protocol) {
   int sockfd;
   int err;
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 
 #if defined(SOCK_NONBLOCK) && defined(SOCK_CLOEXEC)
   sockfd = socket(domain, type | SOCK_NONBLOCK | SOCK_CLOEXEC, protocol);
@@ -404,8 +433,11 @@ int uv__socket(int domain, int type, int protocol) {
 
 
 int uv__accept(int sockfd) {
+          printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   int peerfd;
   int err;
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 
   assert(sockfd >= 0);
 
@@ -455,6 +487,8 @@ skip:
 
 
 int uv__close_nocheckstdio(int fd) {
+          printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   int saved_errno;
   int rc;
 
@@ -474,6 +508,8 @@ int uv__close_nocheckstdio(int fd) {
 
 
 int uv__close(int fd) {
+          printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
 #if !defined(__NUTTX__) && !defined(__TIZENRT__) /* No STDERR_FILENO in nuttx */
   assert(fd > STDERR_FILENO);  /* Catch stdio close bugs. */
 #endif
@@ -488,7 +524,9 @@ int uv__close(int fd) {
     defined(__FreeBSD_kernel__) || \
     defined(__linux__)
 int uv__nonblock_ioctl(int fd, int set) {
-  int r;
+    
+  int r;      printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
 
   do
     r = ioctl(fd, FIONBIO, &set);
@@ -503,6 +541,7 @@ int uv__nonblock_ioctl(int fd, int set) {
 
 int uv__cloexec_ioctl(int fd, int set) {
   int r;
+      printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 
   do
     r = ioctl(fd, set ? FIOCLEX : FIONCLEX);
@@ -515,7 +554,8 @@ int uv__cloexec_ioctl(int fd, int set) {
 }
 #endif
 
-int uv__nonblock_fcntl(int fd, int set) {
+int uv__nonblock_fcntl(int fd, int set) {      printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   int flags;
   int r;
 
@@ -546,7 +586,8 @@ int uv__nonblock_fcntl(int fd, int set) {
 }
 
 
-int uv__cloexec_fcntl(int fd, int set) {
+int uv__cloexec_fcntl(int fd, int set) {       printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
 #if defined(__NUTTX__) || defined(__TIZENRT__)
   return 0;
 #endif
@@ -582,10 +623,14 @@ int uv__cloexec_fcntl(int fd, int set) {
 
 #if defined(__NUTTX__) || defined(__TIZENRT__)
 ssize_t uv__recvmsg(int fd, struct msghdr* msg, int flags) {
+          printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   return -1;
 }
 #else
 ssize_t uv__recvmsg(int fd, struct msghdr* msg, int flags) {
+          printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   struct cmsghdr* cmsg;
   ssize_t rc;
   int* pfd;
@@ -625,6 +670,8 @@ ssize_t uv__recvmsg(int fd, struct msghdr* msg, int flags) {
 
 
 int uv_cwd(char* buffer, size_t* size) {
+          printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   if (buffer == NULL || size == NULL)
     return -EINVAL;
 
@@ -642,6 +689,8 @@ int uv_cwd(char* buffer, size_t* size) {
 
 
 int uv_chdir(const char* dir) {
+          printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   if (chdir(dir))
     return -errno;
 
@@ -650,6 +699,8 @@ int uv_chdir(const char* dir) {
 
 
 static int uv__run_pending(uv_loop_t* loop) {
+          printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   QUEUE* q;
   QUEUE pq;
   uv__io_t* w;
@@ -672,6 +723,8 @@ static int uv__run_pending(uv_loop_t* loop) {
 
 
 static unsigned int next_power_of_two(unsigned int val) {
+          printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   val -= 1;
   val |= val >> 1;
   val |= val >> 2;
@@ -683,6 +736,8 @@ static unsigned int next_power_of_two(unsigned int val) {
 }
 
 static void maybe_resize(uv_loop_t* loop, unsigned int len) {
+          printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   uv__io_t** watchers;
   void* fake_watcher_list;
   void* fake_watcher_count;
@@ -718,6 +773,8 @@ static void maybe_resize(uv_loop_t* loop, unsigned int len) {
 
 
 void uv__io_init(uv__io_t* w, uv__io_cb cb, int fd) {
+          printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   assert(cb != NULL);
   assert(fd >= -1);
   QUEUE_INIT(&w->pending_queue);
@@ -735,6 +792,8 @@ void uv__io_init(uv__io_t* w, uv__io_cb cb, int fd) {
 
 
 void uv__io_start(uv_loop_t* loop, uv__io_t* w, unsigned int events) {
+          printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   assert(0 == (events & ~(POLLIN | POLLOUT | UV__POLLRDHUP)));
   assert(0 != events);
   assert(w->fd >= 0);
@@ -768,6 +827,8 @@ void uv__io_start(uv_loop_t* loop, uv__io_t* w, unsigned int events) {
 
 
 void uv__io_stop(uv_loop_t* loop, uv__io_t* w, unsigned int events) {
+          printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   assert(0 == (events & ~(POLLIN | POLLOUT | UV__POLLRDHUP)));
   assert(0 != events);
 
@@ -800,6 +861,9 @@ void uv__io_stop(uv_loop_t* loop, uv__io_t* w, unsigned int events) {
 
 
 void uv__io_close(uv_loop_t* loop, uv__io_t* w) {
+          printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+      printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   uv__io_stop(loop, w, POLLIN | POLLOUT | UV__POLLRDHUP);
   QUEUE_REMOVE(&w->pending_queue);
 
@@ -809,12 +873,16 @@ void uv__io_close(uv_loop_t* loop, uv__io_t* w) {
 
 
 void uv__io_feed(uv_loop_t* loop, uv__io_t* w) {
+          printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   if (QUEUE_EMPTY(&w->pending_queue))
     QUEUE_INSERT_TAIL(&loop->pending_queue, &w->pending_queue);
 }
 
 
 int uv__io_active(const uv__io_t* w, unsigned int events) {
+          printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   assert(0 == (events & ~(POLLIN | POLLOUT | UV__POLLRDHUP)));
   assert(0 != events);
   return 0 != (w->pevents & events);
@@ -822,6 +890,8 @@ int uv__io_active(const uv__io_t* w, unsigned int events) {
 
 
 int uv__open_cloexec(const char* path, int flags) {
+          printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
+
   int err;
   int fd;
 

@@ -136,6 +136,8 @@ int uv_ip4_addr(const char* ip, int port, struct sockaddr_in* addr) {
   memset(addr, 0, sizeof(*addr));
   addr->sin_family = AF_INET;
   addr->sin_port = htons(port);
+
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
   return uv_inet_pton(AF_INET, ip, &(addr->sin_addr.s_addr));
 }
 
@@ -168,6 +170,7 @@ int uv_ip6_addr(const char* ip, int port, struct sockaddr_in6* addr) {
     addr->sin6_scope_id = if_nametoindex(zone_index);
 #endif
   }
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 
   return uv_inet_pton(AF_INET6, ip, &addr->sin6_addr);
 }

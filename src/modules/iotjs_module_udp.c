@@ -46,6 +46,7 @@ JS_FUNCTION(UDP) {
 JS_FUNCTION(Bind) {
   JS_DECLARE_PTR(jthis, uv_udp_t, udp_handle);
   DJS_CHECK_ARGS(2, string, number);
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 
   iotjs_string_t address = JS_GET_ARG(0, string);
   const int port = JS_GET_ARG(1, number);
@@ -59,6 +60,7 @@ JS_FUNCTION(Bind) {
   if (!jerry_value_is_undefined(reuse_addr)) {
     flags = iotjs_jval_as_boolean(reuse_addr) ? UV_UDP_REUSEADDR : 0;
   }
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 
   char addr[sizeof(sockaddr_in6)];
   int err =
@@ -70,6 +72,7 @@ JS_FUNCTION(Bind) {
 
   jerry_release_value(reuse_addr);
   iotjs_string_destroy(&address);
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 
   return jerry_create_number(err);
 }
@@ -189,6 +192,7 @@ JS_FUNCTION(Send) {
   const unsigned short port = JS_GET_ARG(1, number);
   iotjs_string_t address = JS_GET_ARG(2, string);
   jerry_value_t jcallback = JS_GET_ARG(3, object);
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 
   iotjs_bufferwrap_t* buffer_wrap = iotjs_bufferwrap_from_jbuffer(jbuffer);
   size_t len = iotjs_bufferwrap_length(buffer_wrap);
@@ -215,6 +219,7 @@ JS_FUNCTION(Send) {
   }
 
   iotjs_string_destroy(&address);
+  printf("# %s:%d: %s\n", __FILE__, __LINE__, __FUNCTION__);
 
   return jerry_create_number(err);
 }

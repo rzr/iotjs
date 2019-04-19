@@ -109,6 +109,10 @@ static const char * const wrong_args_msg_p = "wrong type of argument";
 static inline void JERRY_ATTR_ALWAYS_INLINE
 jerry_assert_api_available (void)
 {
+    //printf("# %s:%d: %s\n", __FILE__, __LINE__,
+    //     "__FUNCTION__"
+    //  ); // loop
+
   JERRY_ASSERT (JERRY_CONTEXT (status_flags) & ECMA_STATUS_API_AVAILABLE);
 } /* jerry_assert_api_available */
 
@@ -118,6 +122,8 @@ jerry_assert_api_available (void)
 static inline void JERRY_ATTR_ALWAYS_INLINE
 jerry_make_api_available (void)
 {
+    printf("# %s:%d: %s\n", __FILE__, __LINE__, "__FUNCTION__");
+
   JERRY_CONTEXT (status_flags) |= ECMA_STATUS_API_AVAILABLE;
 } /* jerry_make_api_available */
 
@@ -1326,6 +1332,7 @@ jerry_value_t
 jerry_create_number (double value) /**< double value from which a jerry_value_t will be created */
 {
   jerry_assert_api_available ();
+  printf("# %s:%d: %s %x\n", __FILE__, __LINE__, "__FUNCTION__", value);
 
   return ecma_make_number_value ((ecma_number_t) value);
 } /* jerry_create_number */

@@ -1,7 +1,7 @@
 {
   "modules": {
     "iotjs_basic_modules": {
-      "require": ["assert", "dns", "http", "net", "stream"]
+      "require": ["assert", "dns", "http", "net", "stream", "stm32f7nucleo"]
     },
     "iotjs_core_modules": {
       "require": ["buffer", "console", "events", "fs", "module", "process",

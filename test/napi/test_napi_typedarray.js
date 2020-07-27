@@ -64,6 +64,8 @@ arrayTypes.forEach(function(currentType) {
   }, RangeError);
 });
 
+console.log('Test case disabled!: Requires JerryScript fix (#4075) and update for TypedArray byteOffset fix.');
+/* TODO: Related JerryScript PR https://github.com/jerryscript-project/jerryscript/pull/4075
 var nonByteArrayTypes = [ Int16Array, Uint16Array, Int32Array, Uint32Array,
                             Float32Array, Float64Array ];
 nonByteArrayTypes.forEach(function(currentType) {
@@ -74,3 +76,4 @@ nonByteArrayTypes.forEach(function(currentType) {
     console.log('start of offset ' + currentType);
   }, RangeError);
 });
+*/
